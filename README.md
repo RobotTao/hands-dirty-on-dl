@@ -1,37 +1,45 @@
 # Hands Dirty on DL
 
-#### 介绍
-记录学习Deep Learning所用的一些脚本和Notebook
+## 介绍
+学习Deep Learning，光读论文和看书终觉浅，这里把我学习Deep Learning所写的一些代码和Notebook记录下来，方便查阅。
 
-#### 软件架构
-软件架构说明
+## Setup
 
+### 步骤一. 环境配置
 
-#### 安装教程
+#### 使用`conda`
+```bash
+conda env create -f conda_env.yml
+conda activate pytorch-cu124
+```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+**Q1. 如果在VSCode terminal的prompt看到多个conda env，比如`(pytorch-cu124) (base)`，实际调用的python路径没有指向环境`pytorch-cu124`的python**
 
-#### 使用说明
+    使用如下命令关闭自动激活`base`
+    ```base
+    conda config --set auto_activate_base False
+    ```
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+#### 使用`pip`
+```bash
+pip install -r requirements.txt
+```
 
-#### 参与贡献
+### 步骤二. 执行可编辑安装
+这一步将package`hdd`至于python路径之下。
+```bash
+# 在hands-dirty-on-dl目录下运行该命令
+pip install -e .
+# 此时，你可以运行pytest进行测试
+pytest
+```
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+## Repo结构
 
+* `dataset`: 用于存放模型用到的数据集
+* `hdd`: 存放python代码
+  * `dataset`: 数据集代码
+  * `device`: device相关代码
+  * `visualization`： 可视化相关代码
+* `notebooks`： 存放notebook
 
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
