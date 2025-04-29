@@ -3,6 +3,7 @@
 from pathlib import Path
 from typing import Any, Callable, Optional, Tuple, Union
 
+import torch
 from PIL import Image
 from torchvision.datasets.folder import find_classes, make_dataset
 from torchvision.datasets.utils import download_and_extract_archive, verify_str_arg
@@ -100,13 +101,8 @@ class ImagenetteInMemory(VisionDataset):
         return self._size_root.exists()
 
     def _download(self):
-        if self._check_exists():
-            raise RuntimeError(
-                f"The directory {self._size_root} already exists. "
-                f"If you want to re-download or re-extract the images, delete the directory."
-            )
-
-        download_and_extract_archive(self._url, self.root, md5=self._md5)
+        if not self._check_exists():
+            download_and_extract_archive(self._url, self.root, md5=self._md5)
 
     def __getitem__(self, idx: int) -> Tuple[Any, Any]:
         _, label = self._samples[idx]
@@ -122,3 +118,22 @@ class ImagenetteInMemory(VisionDataset):
 
     def __len__(self) -> int:
         return len(self._samples)
+
+
+def get_mean_and_std(dataset: ImagenetteInMemory):
+    """Compute the mean and std of dataset.
+
+    Args:
+        dataset (ImagenetteInMemory): Imagenette dataset.
+    """
+    # Compute train data mean and std
+    # Note: we just compute the mean of each image's mean and std.
+    mean = torch.zeros(3)
+    std = torch.zeros(3)
+    for i in range(len(dataset)):
+        I, _ = dataset[i]
+        mean += torch.mean(I, dim=(1, 2))
+        std += torch.std(I, dim=(1, 2))
+    mean = mean / len(dataset)
+    std = std / len(dataset)
+    return mean, std

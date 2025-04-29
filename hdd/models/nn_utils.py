@@ -8,10 +8,10 @@ def activation_from_name(name: str) -> nn.Module:
     activation function based on the name.
 
     Args:
-        name (str): activation function name.
+        name: activation function name.
 
     Returns:
-        nn.Module: activation function nn module.
+        activation function nn module.
     """
 
     name = name.lower()
