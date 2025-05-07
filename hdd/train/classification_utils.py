@@ -1,11 +1,13 @@
 """Classification train utils."""
 
 import time
-from typing import Optional, Tuple
+from dataclasses import dataclass
+from typing import List, Optional, Tuple
 
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from torch.utils.data.dataset import Dataset
 
 from hdd.train.early_stopping import EarlyStoppingInterface
 
@@ -139,11 +141,11 @@ def naive_train_classification_model(
         )
         if verbose:
             print(
-                f"Train Epoch: {epoch}/{max_epochs} "
-                f"Avg Loss: {avg_train_loss:0.4f} "
+                f"Epoch: {epoch}/{max_epochs} "
+                f"Train Loss: {avg_train_loss:0.4f} "
                 f"Accuracy: {train_accuracy:0.4f} "
                 f"Time: {t1 - t0:0.5f} "
-                f" | Val Avg Loss: {avg_val_loss:0.4f} "
+                f" | Val Loss: {avg_val_loss:0.4f} "
                 f"Accuracy: {val_accuracy:0.4f}"
             )
         result["train_loss"].append(avg_train_loss)
@@ -152,7 +154,42 @@ def naive_train_classification_model(
         result["val_accuracy"].append(val_accuracy)
         if early_stopper is not None:
             if early_stopper(val_loss=avg_val_loss, model=net):
+                print(f"Early stop at epoch {epoch}!")
                 early_stopper.load_best_model(net)
                 return result
 
+    return result
+
+
+@dataclass
+class EvalResult:
+    idx: int
+    predicted_label: int
+    gt_label: int
+
+
+def eval_image_classifier(
+    net: nn.Module, dataset: Dataset, device: torch.device
+) -> List[EvalResult]:
+    """Evaluation image classifier on dataset.
+
+    Args:
+        net: Classifier.
+        dataset: dataset to test the classifier.
+        device: device.
+
+    Returns:
+        Evaluation result.
+    """
+    result = []
+    for idx in range(len(dataset)):
+        x, y = dataset[idx]
+        x = torch.unsqueeze(x, 0)
+        x = x.to(device)
+        net.eval()
+        with torch.no_grad():
+            logits = net(x)
+            predicted_label = torch.argmax(logits, dim=1).item()
+            sample = EvalResult(idx, int(predicted_label), y)
+            result.append(sample)
     return result

@@ -67,9 +67,10 @@ class EarlyStoppingInMem(EarlyStoppingInterface):
         else:
             # No significant improvement
             self.counter += 1
-            self.trace_func(
-                f"EarlyStopping counter: {self.counter} out of {self.patience}"
-            )
+            if self.verbose:
+                self.trace_func(
+                    f"EarlyStopping counter: {self.counter} out of {self.patience}"
+                )
             if self.counter >= self.patience:
                 self.early_stop = True
                 return True
@@ -152,9 +153,10 @@ class EarlyStopping(EarlyStoppingInterface):
         else:
             # No significant improvement
             self.counter += 1
-            self.trace_func(
-                f"EarlyStopping counter: {self.counter} out of {self.patience}"
-            )
+            if self.verbose:
+                self.trace_func(
+                    f"EarlyStopping counter: {self.counter} out of {self.patience}"
+                )
             if self.counter >= self.patience:
                 self.early_stop = True
                 return True
