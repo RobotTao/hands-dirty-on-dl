@@ -34,9 +34,11 @@ fqdn==1.5.1
 fsspec==2025.3.2
 gmpy2 @ file:///work/ci_py311/gmpy2_1676839849213/work
 h11==0.14.0
+-e git+ssh://git@gitee.com/robottao/hands-dirty-on-dl.git@f6a3885ed1deff1f37934435826f510923f75c0b#egg=hdd
 httpcore==1.0.7
 httpx==0.28.1
 idna @ file:///croot/idna_1714398848350/work
+iniconfig==2.1.0
 ipykernel==6.29.5
 ipython==8.31.0
 isoduration==20.11.0
@@ -88,6 +90,7 @@ parso==0.8.4
 pexpect==4.9.0
 pillow @ file:///croot/pillow_1734430590456/work
 platformdirs==4.3.6
+pluggy==1.5.0
 ply==3.11
 preshed==3.0.9
 prometheus_client==0.21.1
@@ -103,6 +106,7 @@ pyparsing @ file:///croot/pyparsing_1731445506121/work
 PyQt5==5.15.10
 PyQt5-sip @ file:///croot/pyqt-split_1698769088074/work/pyqt_sip
 PySocks @ file:///work/ci_py311/pysocks_1676822712504/work
+pytest==8.3.5
 python-dateutil @ file:///croot/python-dateutil_1716495738603/work
 python-json-logger==3.2.1
 pytz==2025.2

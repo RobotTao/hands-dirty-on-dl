@@ -25,6 +25,15 @@ conda activate pytorch-cu124
 pip install -r requirements.txt
 ```
 
+#### 输出环境配置
+
+```bash
+# 使用pip
+pip freeze > requirements.txt
+# 使用conda
+
+```
+
 ### 步骤二. 执行可编辑安装
 这一步将package`hdd`至于python路径之下。
 ```bash

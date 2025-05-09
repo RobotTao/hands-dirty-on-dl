@@ -1,13 +1,14 @@
 """这个代码是从torchvision的Imagenette代码修改而来，它将图片数据提前载入内存中，可以有效提高训练速度。"""
 
 from pathlib import Path
-from typing import Any, Callable, Optional, Tuple, Union
+from typing import Any, Callable, Dict, Optional, Tuple, Union
 
 import torch
 from PIL import Image
 from torchvision.datasets.folder import find_classes, make_dataset
 from torchvision.datasets.utils import download_and_extract_archive, verify_str_arg
 from torchvision.datasets.vision import VisionDataset
+from torchvision.models import VGG19_BN_Weights
 
 
 class ImagenetteInMemory(VisionDataset):
@@ -137,3 +138,25 @@ def get_mean_and_std(dataset: ImagenetteInMemory):
     mean = mean / len(dataset)
     std = std / len(dataset)
     return mean, std
+
+
+def get_imagenette_label_to_imagenet_label() -> Dict[int, int]:
+    imagenette_label_to_imagenet_label = {}
+    imagenette_class_names = [
+        "tench",
+        "English springer",
+        "cassette player",
+        "chain saw",
+        "church",
+        "French horn",
+        "garbage truck",
+        "gas pump",
+        "golf ball",
+        "parachute",
+    ]
+    for imagenette_label, imagenette_label_name in enumerate(imagenette_class_names):
+        imagenet_label = VGG19_BN_Weights.IMAGENET1K_V1.meta["categories"].index(
+            imagenette_label_name
+        )
+        imagenette_label_to_imagenet_label[imagenette_label] = imagenet_label
+    return imagenette_label_to_imagenet_label

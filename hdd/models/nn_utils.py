@@ -22,3 +22,8 @@ def activation_from_name(name: str) -> nn.Module:
     elif name == "sigmoid":
         return nn.Sigmoid()
     raise ValueError(f"activation {name} is not supported. Please update code.")
+
+
+def count_parameter(model: nn.Module) -> int:
+    """Get the total number trainable parameters in the model."""
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)

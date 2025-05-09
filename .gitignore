@@ -2,6 +2,8 @@
 /dataset/
 # ignore tensorboard folder
 /tensorboard/
+# ignore pretrained models
+/pretrained_models/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
