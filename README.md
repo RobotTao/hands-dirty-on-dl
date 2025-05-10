@@ -31,7 +31,7 @@ pip install -r requirements.txt
 # 使用pip
 pip freeze > requirements.txt
 # 使用conda
-
+conda export > conda_env.yml
 ```
 
 ### 步骤二. 执行可编辑安装

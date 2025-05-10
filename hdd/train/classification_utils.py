@@ -2,7 +2,7 @@
 
 import time
 from dataclasses import dataclass
-from typing import List, Optional, Tuple
+from typing import Callable, List, Optional, Tuple
 
 import torch
 import torch.nn as nn
@@ -14,7 +14,7 @@ from hdd.train.early_stopping import EarlyStoppingInterface
 
 def _train_classifier_naive(
     net: nn.Module,
-    criteria,
+    criteria: nn.CrossEntropyLoss,
     optimizer: optim.Optimizer,
     train_loader: torch.utils.data.DataLoader,
     device: torch.device,
@@ -97,6 +97,25 @@ def naive_train_classification_model(
     scheduler: Optional[torch.optim.lr_scheduler.LRScheduler] = None,
     early_stopper: Optional[EarlyStoppingInterface] = None,
     verbose: bool = True,
+    train_classifier: Callable[
+        [
+            nn.Module,
+            nn.CrossEntropyLoss,
+            optim.Optimizer,
+            torch.utils.data.DataLoader,
+            torch.device,
+        ],
+        Tuple[float, float],
+    ] = _train_classifier_naive,
+    eval_classifier: Callable[
+        [
+            nn.Module,
+            nn.CrossEntropyLoss,
+            torch.utils.data.DataLoader,
+            torch.device,
+        ],
+        Tuple[float, float],
+    ] = _eval_classifier_naive,
 ) -> dict[str, list[float]]:
     """Naive classifier training procedure.
 
@@ -111,7 +130,8 @@ def naive_train_classification_model(
         scheduler: learning rate scheduler.
         early_stopper: early stopper.
         verbose: Print anything or not. Defaults to True.
-
+        train_classifier: Function to train the classifier for one epoch.
+        eval_classifier: Function to eval the classifier for one epoch.
     Returns:
         training statistics.
     """
@@ -123,7 +143,7 @@ def naive_train_classification_model(
     }
     for epoch in range(1, max_epochs + 1):
         t0 = time.time()
-        avg_train_loss, train_accuracy = _train_classifier_naive(
+        avg_train_loss, train_accuracy = train_classifier(
             net,
             criteria,
             optimizer,
@@ -133,7 +153,7 @@ def naive_train_classification_model(
         t1 = time.time()
         if scheduler is not None:
             scheduler.step()
-        avg_val_loss, val_accuracy = _eval_classifier_naive(
+        avg_val_loss, val_accuracy = eval_classifier(
             net,
             criteria,
             val_loader,
