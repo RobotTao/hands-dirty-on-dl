@@ -186,8 +186,8 @@ class InceptionV2(nn.Module):
         # 唯一和V1不同的地方是5✖5卷积被替换成两个3x3卷积
         self.branch3 = nn.Sequential(
             InceptionConv2d(in_channel, ch_5x5_reduce, kernel_size=1),
+            InceptionConv2d(ch_5x5_reduce, ch_5x5_reduce, kernel_size=3, padding=1),
             InceptionConv2d(ch_5x5_reduce, ch_5x5, kernel_size=3, padding=1),
-            InceptionConv2d(ch_5x5, ch_5x5, kernel_size=3, padding=1),
         )
         self.branch4 = nn.Sequential(
             nn.MaxPool2d(kernel_size=3, stride=1, padding=1, ceil_mode=True),
