@@ -276,7 +276,7 @@ class ResnetSmall(nn.Module):
     ) -> None:
         super().__init__()
         self.pre_layer = _Conv2d(
-            3, 64, activation=True, kernel_size=2, padding=1, stride=1
+            3, 64, activation=True, kernel_size=3, padding=1, stride=1
         )
 
         self.layer1 = build_layer(layer_configs[0], downsample=False)
