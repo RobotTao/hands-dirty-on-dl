@@ -182,13 +182,6 @@ resnet34_config = (
     LayerConfig(BasicBlock, 256, 512, 3),
 )
 
-se_resnet34_config = (
-    LayerConfig(SEBottleneckBlock, 64, 64, 3),
-    LayerConfig(SEBottleneckBlock, 64, 128, 4),
-    LayerConfig(SEBottleneckBlock, 128, 256, 6),
-    LayerConfig(SEBottleneckBlock, 256, 512, 3),
-)
-
 resnet50_config = (
     LayerConfig(BottleneckBlock, 64, 256, 3),
     LayerConfig(BottleneckBlock, 256, 512, 4),
