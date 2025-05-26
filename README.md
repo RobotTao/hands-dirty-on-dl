@@ -47,8 +47,12 @@ pytest
 
 * `dataset`: 用于存放模型用到的数据集
 * `hdd`: 存放python代码
+  * `data_util`: 数据相关的Util函数,比如某些数据transforms
   * `dataset`: 数据集代码
   * `device`: device相关代码
+  * `models`: 模型代码
+  * `train`: 训练用到的util函数
   * `visualization`： 可视化相关代码
 * `notebooks`： 存放notebook
+  * `classification` 分类任务相关的notebook
 
