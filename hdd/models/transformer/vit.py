@@ -20,6 +20,7 @@ class PositionWiseMLP(nn.Sequential):
             nn.GELU(),
             nn.Dropout(dropout),
             nn.Linear(diff_dim, embed_dim),
+            nn.GELU(),
         ]
         super().__init__(*layers)
 
@@ -113,7 +114,7 @@ class ViT(nn.Module):
         )
         self.dropout = nn.Dropout(0.0)
         self.ln = nn.LayerNorm(embed_dim, eps=1e-6)
-        self.class_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
+        self.class_token = nn.Parameter(torch.empty(1, 1, embed_dim).normal_(std=0.05))
         self.encoder = Encoder(embed_dim, n_heads, diff_dim, dropout, num_layers)
         self.classifier = nn.Linear(embed_dim, num_classes)
 
@@ -141,6 +142,6 @@ class ViT(nn.Module):
         tokens = self.class_token.expand(N, -1, -1)
         tokens = torch.cat([tokens, X], dim=1) + self.pos_embedding
         tokens = self.dropout(tokens)
-        tokens = self.ln(self.encoder(tokens))
-        feature = tokens[:, 0]
+        tokens = self.encoder(tokens)
+        feature = self.ln(tokens[:, 0])
         return self.classifier(feature)
