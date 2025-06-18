@@ -118,11 +118,16 @@ class ViT(nn.Module):
         self.encoder = Encoder(embed_dim, n_heads, diff_dim, dropout, num_layers)
         self.classifier = nn.Linear(embed_dim, num_classes)
 
-        # This was important from their code.
-        # Initialize parameters with Glorot / fan_avg.
+        # 从 https://nlp.seas.harvard.edu/annotated-transformer/抄的
+        # 原始代码会使得训练不稳定,乘以0.1
         for p in self.parameters():
             if p.dim() > 1:
-                nn.init.xavier_uniform_(p)
+                # 直接用xavier uniform会导致训练不稳定
+                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                nn.init.xavier_uniform_(p) * 0.1
 
     def process_input(self, X: Tensor) -> Tensor:
         """X is of shape (N,C,H,W).
