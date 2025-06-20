@@ -137,7 +137,7 @@ class ViT(nn.Module):
         n_h = H // self.patch_size
         n_w = W // self.patch_size
         X = X.reshape(N, C, n_h, self.patch_size, n_w, self.patch_size)
-        X = X.permute(0, 2, 4, 3, 5, 1).reshape(N, n_h * n_w, -1)
+        X = X.permute(0, 2, 4, 3, 5, 1).contiguous().reshape(N, n_h * n_w, -1)
         projected_X = self.seq_project(X)  # (N,hidden_dim,NH, NW)
         return projected_X
 
