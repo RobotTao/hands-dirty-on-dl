@@ -19,7 +19,7 @@ class DNLayerStandard(nn.Module):
             dropout: Dropout ratio.
         """
         super().__init__()
-        self.resbranch = nn.Sequential(
+        self.fn = nn.Sequential(
             nn.BatchNorm2d(channel),
             nn.ReLU(inplace=True),
             nn.Conv2d(
@@ -34,8 +34,7 @@ class DNLayerStandard(nn.Module):
         )
 
     def forward(self, X: torch.Tensor) -> torch.Tensor:
-        res = self.resbranch(X)
-        return torch.concat([res, X], dim=1)
+        return self.fn(X)
 
 
 class DNLayerBottleneck(nn.Module):
@@ -51,7 +50,7 @@ class DNLayerBottleneck(nn.Module):
         """
         super().__init__()
         bottleneck_channel = 4 * growth_rate
-        self.resbranch = nn.Sequential(
+        self.fn = nn.Sequential(
             nn.BatchNorm2d(channel),
             nn.ReLU(inplace=True),
             # Start of bottleneck
@@ -79,8 +78,7 @@ class DNLayerBottleneck(nn.Module):
         )
 
     def forward(self, X: torch.Tensor) -> torch.Tensor:
-        res = self.resbranch(X)
-        return torch.concat([res, X], dim=1)
+        return self.fn(X)
 
 
 class TransitionLayer(nn.Sequential):
@@ -135,9 +133,11 @@ class DNBlock(nn.Module):
         self.out_channel = in_channel
 
     def forward(self, X: torch.Tensor) -> torch.Tensor:
+        feature = X
         for layer in self.dense_layers:
-            X = layer(X)
-        return X
+            new_feature = layer(feature)
+            feature = torch.cat([feature, new_feature], dim=1)
+        return feature
 
 
 DNBlockStandard = partial(DNBlock, DNLayer=DNLayerStandard)
