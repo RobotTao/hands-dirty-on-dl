@@ -29,7 +29,7 @@ pip install -r requirements.txt
 
 ```bash
 # 使用pip
-pip freeze > requirements.txt
+pip list --format=freeze > requirements.txt
 # 使用conda
 conda export > conda_env.yml
 ```

@@ -8,90 +8,95 @@ asttokens==3.0.0
 async-lru==2.0.4
 attrs==24.3.0
 babel==2.16.0
+backcall==0.2.0
 beautifulsoup4==4.12.3
 bleach==6.2.0
 blis==1.3.0
-Brotli @ file:///croot/brotli-split_1736182456865/work
+Brotli==1.0.9
 catalogue==2.0.10
-certifi @ file:///croot/certifi_1734473278428/work/certifi
+certifi==2024.12.14
 cffi==1.17.1
-charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
+charset-normalizer==3.3.2
 click==8.1.8
 cloudpathlib==0.21.0
 comm==0.2.2
 confection==0.1.5
-contourpy @ file:///croot/contourpy_1732540045555/work
-cycler @ file:///tmp/build/80754af9/cycler_1637851556182/work
+contourpy==1.3.1
+cycler==0.11.0
 cymem==2.0.11
 debugpy==1.8.11
 decorator==5.1.1
 defusedxml==0.7.1
+docopt==0.6.2
 einops==0.8.1
 executing==2.1.0
 fastjsonschema==2.21.1
-filelock @ file:///croot/filelock_1700591183607/work
-fonttools @ file:///croot/fonttools_1713551344105/work
+filelock==3.13.1
+fonttools==4.51.0
 fqdn==1.5.1
 fsspec==2025.3.2
-gmpy2 @ file:///work/ci_py311/gmpy2_1676839849213/work
+gmpy2==2.1.2
 h11==0.14.0
--e git+ssh://git@gitee.com/robottao/hands-dirty-on-dl.git@ab8937965628b83d9015ec59e6fda8146677fa26#egg=hdd
+hdd==0.1
 hf-xet==1.1.5
 httpcore==1.0.7
 httpx==0.28.1
 huggingface-hub==0.33.0
-idna @ file:///croot/idna_1714398848350/work
+idna==3.7
 iniconfig==2.1.0
 ipykernel==6.29.5
-ipython==8.31.0
+ipython==8.12.3
 isoduration==20.11.0
 jedi==0.19.2
-Jinja2 @ file:///croot/jinja2_1730902924303/work
+Jinja2==3.1.4
 joblib==1.4.2
 json5==0.10.0
 jsonpointer==3.0.0
 jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
-jupyter-events==0.11.0
-jupyter-lsp==2.2.5
 jupyter_client==8.6.3
 jupyter_core==5.7.2
+jupyter-events==0.11.0
+jupyter-lsp==2.2.5
 jupyter_server==2.15.0
 jupyter_server_terminals==0.5.3
 jupyterlab==4.3.4
 jupyterlab_pygments==0.3.0
 jupyterlab_server==2.27.3
-kiwisolver @ file:///work/ci_py311/kiwisolver_1676827230232/work
+kiwisolver==1.4.4
 langcodes==3.5.0
 language_data==1.3.0
 marisa-trie==1.2.1
 markdown-it-py==3.0.0
-MarkupSafe @ file:///croot/markupsafe_1736366905094/work
+MarkupSafe==2.1.3
 matplotlib==3.10.0
 matplotlib-inline==0.1.7
 mdurl==0.1.2
 mistune==3.1.0
+mkl_fft==1.3.11
+mkl_random==1.2.8
 mkl-service==2.4.0
-mkl_fft @ file:///io/mkl313/mkl_fft_1730824109137/work
-mkl_random @ file:///io/mkl313/mkl_random_1730823916628/work
-mpmath @ file:///croot/mpmath_1690848262763/work
+mpmath==1.3.0
 murmurhash==1.0.12
 narwhals==1.33.0
 nbclient==0.10.2
 nbconvert==7.16.5
 nbformat==5.10.4
 nest-asyncio==1.6.0
-networkx @ file:///croot/networkx_1717597493534/work
+networkx==3.2.1
 notebook==7.3.2
 notebook_shim==0.2.4
-numpy @ file:///croot/numpy_and_numpy_base_1725470312869/work/dist/numpy-2.0.1-cp311-cp311-linux_x86_64.whl#sha256=372b9067cf9c96d8662c6f20ef49eeda43f0f8d2f074820224c954d8d8fae7bc
+numpy==2.0.1
 overrides==7.7.0
-packaging @ file:///croot/packaging_1734472117206/work
+packaging==24.2
 pandas==2.2.3
 pandocfilters==1.5.1
 parso==0.8.4
 pexpect==4.9.0
-pillow @ file:///croot/pillow_1734430590456/work
+pickleshare==0.7.5
+pillow==11.0.0
+pip==24.2
+pipreqs==0.5.0
 platformdirs==4.3.6
 pluggy==1.5.0
 ply==3.11
@@ -105,18 +110,18 @@ pycparser==2.22
 pydantic==2.11.2
 pydantic_core==2.33.1
 Pygments==2.19.1
-pyparsing @ file:///croot/pyparsing_1731445506121/work
+pyparsing==3.2.0
 PyQt5==5.15.10
-PyQt5-sip @ file:///croot/pyqt-split_1698769088074/work/pyqt_sip
-PySocks @ file:///work/ci_py311/pysocks_1676822712504/work
+PyQt5-sip==12.13.0
+PySocks==1.7.1
 pytest==8.3.5
-python-dateutil @ file:///croot/python-dateutil_1716495738603/work
+python-dateutil==2.9.0.post0
 python-json-logger==3.2.1
 pytz==2025.2
-PyYAML @ file:///croot/pyyaml_1728657952215/work
+PyYAML==6.0.2
 pyzmq==26.2.0
 referencing==0.35.1
-requests @ file:///croot/requests_1730999120400/work
+requests==2.32.3
 rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
 rich==14.0.0
@@ -125,8 +130,9 @@ safetensors==0.5.3
 scikit-learn==1.6.1
 scipy==1.15.2
 Send2Trash==1.8.3
+setuptools==75.1.0
 shellingham==1.5.4
-sip @ file:///croot/sip_1698675935381/work
+sip==6.7.12
 six==1.17.0
 smart-open==7.1.0
 sniffio==1.3.1
@@ -147,22 +153,24 @@ torchaudio==2.5.1
 torchsummary==1.5.1
 torchtext==0.18.0
 torchvision==0.20.1
-tornado @ file:///croot/tornado_1733960490606/work
+tornado==6.4.2
 tqdm==4.67.1
 traitlets==5.14.3
 triton==3.1.0
 typer==0.15.2
 types-python-dateutil==2.9.0.20241206
+typing_extensions==4.12.2
 typing-inspection==0.4.0
-typing_extensions @ file:///croot/typing_extensions_1734714854207/work
 tzdata==2025.2
-unicodedata2 @ file:///croot/unicodedata2_1713212950228/work
+unicodedata2==15.1.0
 uri-template==1.3.0
-urllib3 @ file:///croot/urllib3_1727769808118/work
+urllib3==2.2.3
 wasabi==1.1.3
 wcwidth==0.2.13
 weasel==0.4.1
 webcolors==24.11.1
 webencodings==0.5.1
 websocket-client==1.8.0
+wheel==0.44.0
 wrapt==1.17.2
+yarg==0.1.9
