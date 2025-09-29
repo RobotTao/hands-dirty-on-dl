@@ -345,6 +345,7 @@ def main(args):
     if "rcnn" in args.model:
         if args.rpn_score_thresh is not None:
             kwargs["rpn_score_thresh"] = args.rpn_score_thresh
+    print(kwargs, num_classes)
     model = torchvision.models.get_model(
         args.model,
         weights=args.weights,
@@ -457,3 +458,5 @@ def main(args):
 if __name__ == "__main__":
     args = get_args_parser().parse_args()
     main(args)
+
+# torchrun --nproc_per_node=1   ./hdd/scripts/detection/train.py    --dataset coco --model fasterrcnn_resnet50_fpn --epochs 26    --lr-steps 16 22 --aspect-ratio-group-factor 3 --weights-backbone ResNet50_Weights.IMAGENET1K_V1 --data-path /home/tf/workspace/hands-dirty-on-dl/dataset/coco/ --use-v2
